@@ -258,7 +258,7 @@ def memoize_persistently(filename):
 
 _geolocator = Nominatim()
 
-@memoize_persistently('scraper/address_location_cache.pickle')
+@memoize_persistently('address_location_cache.pickle')
 @rate_limited()
 def get_coordinates(address, timeout=5):
     """
