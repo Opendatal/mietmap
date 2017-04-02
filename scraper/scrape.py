@@ -43,6 +43,7 @@ import urllib2
 from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim
 
+HERE = os.path.abspath(os.path.dirname(__file__))
 
 # Immobilienscout24 URLs for listings in Karlsruhe
 BASE_URL = 'http://www.immobilienscout24.de/Suche/S-T/Wohnung-Miete/Baden-Wuerttemberg/Karlsruhe'
@@ -231,6 +232,7 @@ def memoize_persistently(filename):
     pickle protocol. The arguments must also be usable as dictionary
     keys.
     """
+    filename = os.path.join(HERE, filename)
     try:
         with open(filename, 'rb') as cache_file:
             cache = pickle.load(cache_file)
@@ -307,8 +309,6 @@ if __name__ == '__main__':
     import logging.handlers
     import os.path
     import sys
-
-    HERE = os.path.abspath(os.path.dirname(__file__))
 
     DB_FILE = os.path.join(HERE, 'listings.sqlite')
     EXPORT_DIR = os.path.join(HERE, 'export')
