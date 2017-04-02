@@ -1,8 +1,11 @@
 Map for Flat Rental Prices
 ==========================
-This is a small scraper for flat rental prices in German cities. This code gets refactored, so any German city can use this rent map.
+This is a map based on leaflet to display flat rental prices of German cities. 
+This code gets refactored, so any German city can use this rent map.
 
-The data is based on ads from [Immobilienscout24](http://www.immobilienscout24.de/) and is collected using a custom scraper. Scraper and heatmap generator are both part of the repo.
+The data is based on ads from [Immobilienscout24](http://www.immobilienscout24.de/) 
+and is collected using a custom scraper written in python2. Scraper and heatmap 
+generator are both part of the repo.
 
 Usage
 -----
@@ -39,8 +42,8 @@ License
 Licensed under the MIT license, see the file `LICENSE`.
 
 It's a forked project from CodeforKarlsruhe. Thanks, you are awesome!
-[mietmap-scraper]: https://github.com/CodeforKarlsruhe/mietmap-scraper
-[mietmap]: https://github.com/CodeforKarlsruhe/mietmap
-[mietmap-overlay]: https://github.com/CodeforKarlsruhe/mietmap-overlay
-[virtualenv]: https://virtualenv.pypa.io/
+[mietmap-scraper](https://github.com/CodeforKarlsruhe/mietmap-scraper )
+[mietmap](https://github.com/CodeforKarlsruhe/mietmap )
+[mietmap-overlay](https://github.com/CodeforKarlsruhe/mietmap-overlay )
+[virtualenv](https://virtualenv.pypa.io/ )
 
