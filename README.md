@@ -42,8 +42,8 @@ License
 Licensed under the MIT license, see the file `LICENSE`.
 
 It's a forked project from CodeforKarlsruhe. Thanks, you are awesome!
-[mietmap-scraper](https://github.com/CodeforKarlsruhe/mietmap-scraper )
-[mietmap](https://github.com/CodeforKarlsruhe/mietmap )
-[mietmap-overlay](https://github.com/CodeforKarlsruhe/mietmap-overlay )
-[virtualenv](https://virtualenv.pypa.io/ )
+* [mietmap-scraper](https://github.com/CodeforKarlsruhe/mietmap-scraper )
+* [mietmap](https://github.com/CodeforKarlsruhe/mietmap )
+* [mietmap-overlay](https://github.com/CodeforKarlsruhe/mietmap-overlay )
+* [virtualenv](https://virtualenv.pypa.io/ )
 
