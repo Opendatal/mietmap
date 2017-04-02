@@ -5,13 +5,13 @@
         <title>Mietpreise In Karlsruhe</title>
         <meta name="viewport" content="initial-scale=1,width=device-width">
 
-        <link rel="stylesheet" href="Leaflet-0.7.3/leaflet.css"/>
-        <link rel="stylesheet" href="Leaflet.label/leaflet.label.css"/>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="libs/Leaflet-0.7.3/leaflet.css"/>
+        <link rel="stylesheet" href="libs/Leaflet.label/leaflet.label.css"/>
+        <link rel="stylesheet" href="libs/style.css"/>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="Leaflet.zoomhome/leaflet.zoomhome.css"/>
+        <link rel="stylesheet" href="libs/Leaflet.zoomhome/leaflet.zoomhome.css"/>
 
-        <script src="jquery-1.11.2.min.js"></script>
+        <script src="libs/jquery-1.11.2.min.js"></script>
 
         <script>
             // Force canvas display, much faster when displaying a lot of
@@ -19,12 +19,12 @@
             // http://leafletjs.com/reference.html#path-canvas
             var L_PREFER_CANVAS = true;
         </script>
-        <script src="Leaflet-0.7.3/leaflet.js"></script>
-        <script src="Leaflet.label/leaflet.label.js"></script>
-        <script src="Leaflet.zoomhome/leaflet.zoomhome.min.js"></script>
+        <script src="libs/Leaflet-0.7.3/leaflet.js"></script>
+        <script src="libs/Leaflet.label/leaflet.label.js"></script>
+        <script src="libs/Leaflet.zoomhome/leaflet.zoomhome.min.js"></script>
 
-        <script src="colormap.js"></script>
-        <script src="mietmap.js"></script>
+        <script src="libs/colormap.js"></script>
+        <script src="libs/mietmap.js"></script>
 
         <script>
             var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
@@ -37,14 +37,14 @@
                               'CC-BY-SA</a>. Tiles &copy; <a href="http://cartodb.com/attributions">' +
                               'CartoDB</a>';
 
-            var OVERLAY_URL = 'http://karlsruhe.codefor.de/mieten/overlay.png';
+            var OVERLAY_URL = 'overlay.png';
             var OVERLAY_BOUNDS = [[48.92, 8.28], [49.08, 8.53]];
             var OVERLAY_OPTIONS = {opacity: 0.75};
 
             var CIRCLE_RADIUS = 3;
             var CIRCLE_OPTIONS = {color: '#000', weight: 1, fillOpacity: 1};
 
-            var RENT_URL = "mieten.json";
+            var RENT_URL = "scraper/export/markers.json";
             var MIN_RENT = 5;
             var MAX_RENT = 20;
             var RENT_SPAN = MAX_RENT - MIN_RENT;
