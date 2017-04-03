@@ -149,6 +149,7 @@ def extract_listings(soup):
     Returns a dict that maps listing IDs to listing details.
     """
     listings = {}
+    no_addresses = 0
     for entry in soup.find_all('article', class_="result-list-entry"):
         for a in entry.find_all('a'):
             if a.get('href', '').startswith('/expose/'):
@@ -157,10 +158,19 @@ def extract_listings(soup):
         else:
             # Couldn't find listing's ID
             continue
-        street_span = entry.find('div', class_='result-list-entry__address').find('span').contents[0]
+        street_span = entry.find('div', class_='result-list-entry__address').find('span')
         if not street_span:
-            continue
-        street, number, suburb = parse_address(unicode(street_span.string))
+            entry.find('div', class_='result-list-entry__address').find('a')
+        try:
+            street_span = street_span.contents[0]
+        except:
+            pass
+        if not street_span:
+            no_addresses += 1
+            street_span = ''
+            street, number, suburb = '', '', ''
+        else:
+            street, number, suburb = parse_address(unicode(street_span))
         for dl in entry.find_all('dl', class_='result-list-entry__primary-criterion'):
             dd = dl.find('dd')
             content = unicode(dd.string).strip()
@@ -176,7 +186,7 @@ def extract_listings(soup):
             'area': area,
         }
         print(listings)
-    return listings
+    return (listings, no_addresses)
 
 
 def extract_number_of_pages(soup):
@@ -345,15 +355,24 @@ if __name__ == '__main__':
     def get_new_listings(db):
         num_pages = None
         page_index = 1
+        non_addr_index = 0
+        new_count_index = 0
         while (not num_pages) or (page_index <= num_pages):
             logger.info("Fetching page %d" % page_index)
             page = get_page(page_index)
             num_pages = extract_number_of_pages(page)
             listings = extract_listings(page)
-            new_count = store_listings(db, listings)
-            logger.info("Extracted %d listings (%d new)" % (len(listings),
+            new_count = store_listings(db, listings[0])
+            logger.info("Extracted %d listings (%d new)" % (len(listings[0]),
                         new_count))
+            logger.info("%d listings without addresses" % listings[1])
+            
+            non_addr_index += listings[1]
             page_index += 1
+            new_count_index += new_count
+
+        logger.info("Overall %d listings without addresses" % non_addr_index)
+        logger.info("Overall %d new listings" % new_count_index)
 
     def add_coordinates(db):
         logger.info('Looking up address coordinates (this might take a while)')
