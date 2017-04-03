@@ -38,8 +38,10 @@
                               'CartoDB</a>';
 
             var OVERLAY_URL = 'overlay.png';
-            var OVERLAY_BOUNDS = [[48.92, 8.28], [49.08, 8.53]];
+            var OVERLAY_BOUNDS = [[(INITIAL_LOCATION[0]-0.0940679),(INITIAL_LOCATION[1]-0.1254366)], [(INITIAL_LOCATION[0]+0.0659321),(INITIAL_LOCATION[1]+0.125563)]]; 
+            //var OVERLAY_BOUNDS = [[48.92, 8.28], [49.08, 8.53]]; 
             var OVERLAY_OPTIONS = {opacity: 0.75};
+
 
             var CIRCLE_RADIUS = 3;
             var CIRCLE_OPTIONS = {color: '#000', weight: 1, fillOpacity: 1};
