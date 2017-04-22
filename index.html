@@ -27,8 +27,15 @@
         <script src="libs/mietmap.js"></script>
 
         <script>
+            var appConfig, LAT, LON = 0
+            $.getJSON('./config.json', function(data) { 
+                appConfig = data;
+                LAT = parseFloat(appConfig['lat']);
+                LON = parseFloat(appConfig['lon']);
+            });
             var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
-            var INITIAL_LOCATION = [49.0140679, 8.4044366];
+            var INITIAL_LOCATION = 0;
+//            var INITIAL_LOCATION = [49.0140679, 8.4044366];
             var INITIAL_ZOOM = 13;
             var MAX_ZOOM = 16;
             var MIN_ZOOM = 11;
@@ -38,8 +45,8 @@
                               'CartoDB</a>';
 
             var OVERLAY_URL = 'overlay.png';
-            var OVERLAY_BOUNDS = [[(INITIAL_LOCATION[0]-0.0940679),(INITIAL_LOCATION[1]-0.1254366)], [(INITIAL_LOCATION[0]+0.0659321),(INITIAL_LOCATION[1]+0.125563)]]; 
-            //var OVERLAY_BOUNDS = [[48.92, 8.28], [49.08, 8.53]]; 
+            var OVERLAY_BOUNDS = 0; 
+//          var OVERLAY_BOUNDS = [[48.92, 8.28], [49.08, 8.53]]; 
             var OVERLAY_OPTIONS = {opacity: 0.75};
 
 
@@ -52,6 +59,8 @@
             var RENT_SPAN = MAX_RENT - MIN_RENT;
 
             $(document).ready(function() {
+                INITIAL_LOCATION = [LAT, LON];
+                OVERLAY_BOUNDS = [[(INITIAL_LOCATION[0]-0.0940679),(INITIAL_LOCATION[1]-0.1254366)], [(INITIAL_LOCATION[0]+0.0659321),(INITIAL_LOCATION[1]+0.125563)]]; 
                 initMap();
                 initLegend();
             });

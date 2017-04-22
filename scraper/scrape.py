@@ -46,9 +46,11 @@ from geopy.geocoders import Nominatim
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 # Immobilienscout24 URLs for listings in Karlsruhe
-BASE_URL = 'http://www.immobilienscout24.de/Suche/S-T/Wohnung-Miete/Baden-Wuerttemberg/Karlsruhe'
-PAGE_URL = 'http://www.immobilienscout24.de/Suche/S-T/P-%d/Wohnung-Miete/Baden-Wuerttemberg/Karlsruhe?pagerReporting=true'
-CITY = 'Karlsruhe'
+with open(HERE + '/../config.json') as config_json:
+    config = json.load(config_json)
+    BASE_URL = config['base-url']
+    PAGE_URL = config['page-url']
+    CITY = config['city']
 
 @contextlib.contextmanager
 def prepare_database(filename):

@@ -1,0 +1,7 @@
+*.log
+*.log.*
+*.pickle
+*.sqlite
+colormap.json
+scraper/export
+overlay.png
