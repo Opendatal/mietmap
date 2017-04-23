@@ -24,6 +24,10 @@ Install the dependencies:
 
     pip install -r requirements.txt
 
+Set your configuration (edit it to your needs):
+
+    cp config.sample.json config.json
+
 Run the scraper to get the prices and addresses from ImmobilienScout24:
 
     python scraper/scrape.py

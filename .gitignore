@@ -2,6 +2,7 @@
 *.log.*
 *.pickle
 *.sqlite
+config.json
 colormap.json
 scraper/export
 overlay.png
