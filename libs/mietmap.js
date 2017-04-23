@@ -91,6 +91,7 @@ function initColorbar() {
     $('#colorbar').css('background', gradient);
     $('#min-rent').html(MIN_RENT + ' €/m²');
     $('#max-rent').html(MAX_RENT + ' €/m²');
+    $('#city').html('Mietpreise in ' + CITY);
 }
 
 /*
