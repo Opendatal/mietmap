@@ -34,17 +34,29 @@ import clusterpolate
 import matplotlib.cm
 import numpy as np
 
+import os
+
+HERE = os.path.abspath(os.path.dirname(__file__))
+
+with open(HERE + '/config.json') as config_json:
+    config = json.load(config_json)
+    LAT = config['lat']
+    LON = config['lon']
+    MIN_RENT = config['min_rent']
+    MAX_RENT = config['max_rent']
+
+LOCATION = (LAT, LON)
 
 # Rent range for data sanitation
-MIN_RENT = 5
-MAX_RENT = 20
+#MIN_RENT = 5
+#MAX_RENT = 20
 
 # Heatmap options
-LOCATION = (49.0140679, 8.4044366)
+#LOCATION = (49.0140679, 8.4044366)
 #HEATMAP_AREA = ((8.28, 49.08), (8.53, 48.92))
 HEATMAP_AREA = (((LOCATION[1]-0.1254366), (LOCATION[0]+0.0659321)), ((LOCATION[1]+0.125563), (LOCATION[0]-0.0940679)))
 HEATMAP_SIZE = (400, 256)
-HEATMAP_COLORMAP = matplotlib.cm.summer
+HEATMAP_COLORMAP = matplotlib.cm.viridis
 HEATMAP_RADIUS = 0.0001
 
 # Number of entries in the exported colormap
