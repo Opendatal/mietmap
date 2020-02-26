@@ -35,6 +35,13 @@
                 MIN_RENT = appConfig['min_rent'];
                 MAX_RENT = appConfig['max_rent'];
                 CITY = appConfig['city'];
+
+                INITIAL_LOCATION = [LAT, LON];
+                OVERLAY_BOUNDS = [[(INITIAL_LOCATION[0]-0.0940679),(INITIAL_LOCATION[1]-0.1254366)], [(INITIAL_LOCATION[0]+0.0659321),(INITIAL_LOCATION[1]+0.125563)]]; 
+                RENT_URL = 'scraper/export/markers.json';
+                RENT_SPAN = MAX_RENT - MIN_RENT;
+                initMap();
+                initLegend();
             });
             var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
             var INITIAL_LOCATION = 0;
@@ -59,14 +66,6 @@
             var RENT_URL = 0;
             var RENT_SPAN = 0;
 
-            $(document).ready(function() {
-                INITIAL_LOCATION = [LAT, LON];
-                OVERLAY_BOUNDS = [[(INITIAL_LOCATION[0]-0.0940679),(INITIAL_LOCATION[1]-0.1254366)], [(INITIAL_LOCATION[0]+0.0659321),(INITIAL_LOCATION[1]+0.125563)]]; 
-                RENT_URL = 'scraper/export/markers.json';
-                RENT_SPAN = MAX_RENT - MIN_RENT;
-                initMap();
-                initLegend();
-            });
         </script>
     </head>
     <body>

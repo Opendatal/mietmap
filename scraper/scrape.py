@@ -27,6 +27,7 @@ Scraper for renting costs in German Cities.
 
 from __future__ import division, unicode_literals
 
+import sys
 import cgi
 import codecs
 import contextlib
@@ -132,6 +133,7 @@ def parse_address(address):
     """
     Parse an address string into street, house number, and suburb.
     """
+    logger.info('parse_address: %s' % address)
     fields = [s.strip() for s in address.split(', ')]
     if len(fields) == 2:
         street = None
@@ -160,11 +162,11 @@ def extract_listings(soup):
         else:
             # Couldn't find listing's ID
             continue
-        street_span = entry.find('div', class_='result-list-entry__address').find('span')
+        street_span = entry.find('div', class_='result-list-entry__address').find('button')
         if not street_span:
             entry.find('div', class_='result-list-entry__address').find('a')
         try:
-            street_span = street_span.contents[0]
+            street_span = street_span.contents[1]
         except:
             pass
         if not street_span:
@@ -187,7 +189,7 @@ def extract_listings(soup):
             'rent': rent,
             'area': area,
         }
-        print(listings)
+        #print(listings)
     return (listings, no_addresses)
 
 
@@ -270,7 +272,7 @@ def memoize_persistently(filename):
     return decorator
 
 
-_geolocator = Nominatim()
+_geolocator = Nominatim(user_agent="mietmap")
 
 @memoize_persistently('address_location_cache.pickle')
 @rate_limited()
@@ -289,7 +291,11 @@ def get_coordinates(address, timeout=5):
     """
     location = _geolocator.geocode(address, timeout=timeout)
     if not location:
+        sys.stdout.write("F")
+        sys.stdout.flush()
         return None, None
+    sys.stdout.write(".")
+    sys.stdout.flush()
     return location.latitude, location.longitude
 
 
@@ -320,7 +326,6 @@ if __name__ == '__main__':
     import logging
     import logging.handlers
     import os.path
-    import sys
 
     DB_FILE = os.path.join(HERE, 'listings.sqlite')
     EXPORT_DIR = os.path.join(HERE, 'export')
@@ -379,13 +384,13 @@ if __name__ == '__main__':
     def add_coordinates(db):
         logger.info('Looking up address coordinates (this might take a while)')
         c = db.cursor()
-        c.execute('''SELECT id, street, number, suburb FROM listings
-                  WHERE (latitude IS NULL) AND (suburb NOT NULL) AND
+        c.execute('''SELECT id, street, number FROM listings
+                  WHERE (latitude IS NULL) AND 
                   (street NOT NULL) AND (number NOT NULL);''')
         updates = []
         for row in c:
-            id, street, number, suburb = row
-            address = '%s %s, %s, %s' % (street, number, suburb, CITY)
+            id, street, number = row
+            address = '%s %s, %s' % (street, number, CITY)
             coordinates = get_coordinates(address)
             if coordinates[0] is not None:
                 updates.append((coordinates[0], coordinates[1], id))
@@ -402,7 +407,7 @@ if __name__ == '__main__':
         logger.info('Exporting marker data to JSON file "%s"' % filename)
         c = db.cursor()
         c.execute('''SELECT latitude, longitude, area, rent FROM listings
-                     WHERE (latitude NOT NULL) AND (number NOT NULL);''')
+                     WHERE (latitude NOT NULL) AND (number NOT NULL) AND (area > 0);''')
         data = [(round(row[0], 5), round(row[1], 5), round(row[3] / row[2], 1))
                 for row in c]
         dump_json(data, filename)
