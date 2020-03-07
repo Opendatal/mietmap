@@ -1,0 +1,9 @@
+{
+    "base-url": "https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/wuppertal/wohnung-mieten",
+    "page-url": "https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/wuppertal/wohnung-mieten?pagenumber=%d",
+    "city": "Wuppertal",
+    "lat": 51.2675,
+    "lon": 7.1823,
+    "min_rent": 4,
+    "max_rent": 20
+}
